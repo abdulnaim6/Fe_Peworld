@@ -1,0 +1,87 @@
+.head {
+    padding-bottom: 40em;
+  }
+  .content {
+    display: flex;
+  }
+  .contentleft {
+    background-color: #fff;
+    height: 60em;
+    width: 20em;
+    margin-left: 4em;
+    margin-top: 3em;
+    border-radius: 25px;
+  }
+  .contentimg {
+    margin-left: 5em;
+    margin-top: 3em;
+    border-radius: 60%;
+  }
+  .contentleft h3 {
+    color: #1f2a36;
+    font-family: Open Sans;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 56px;
+    margin-left: 1em;
+  }
+  .contentleft p {
+    color: #1f2a36;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-left: 20px;
+  }
+  .contentleft button {
+    background-color: #5e50a1;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: #fff;
+    margin-left: 1em;
+  }
+  .skills button {
+    width: 80px;
+    height: 28px;
+    flex-shrink: 0;
+    background-color: #fbb017;
+  }
+  .contentright {
+    background-color: #fff;
+    height: 60em;
+    width: 50em;
+    margin-left: 4em;
+    margin-top: 3em;
+    border-radius: 25px;
+    display: table-row;
+  }
+  .title {
+    display: flex;
+    margin-left: 2em;
+    margin-top: 2em;
+  }
+  .title h3 {
+    margin-left: 2em;
+    border-bottom: 3px solid transparent;
+  }
+  .title h3:active,
+  .title h3:focus {
+    border-bottom: 3px solid #5e50a1;
+  }
+  .porto {
+    text-align: center;
+    display: table-row;
+  }
+  .contentrightimg {
+    margin-left: 3em;
+    margin-top: 3em;
+  }
+  .contentright p {
+    text-align: center;
+    margin-top: 1em;
+  }
+  

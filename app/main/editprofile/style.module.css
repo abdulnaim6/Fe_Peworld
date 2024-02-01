@@ -1,0 +1,113 @@
+.head {
+    padding-bottom: 40em;
+  }
+  .content {
+    display: flex;
+  }
+  .contentleft {
+    background-color: #fff;
+    height: 150em;
+    width: 20em;
+    margin-left: 4em;
+    margin-top: 3em;
+    border-radius: 25px;
+  }
+  .contentimg {
+    margin-left: 5em;
+    margin-top: 3em;
+    border-radius: 60%;
+  }
+  .contentleft h3 {
+    color: #1f2a36;
+    font-family: Open Sans;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 56px;
+    margin-left: 1em;
+  }
+  .contentleft p {
+    color: #1f2a36;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-left: 20px;
+  }
+  .contentleft button {
+    background-color: #5e50a1;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: #fff;
+    margin-left: 1em;
+  }
+  .skills button {
+    width: 80px;
+    height: 28px;
+    flex-shrink: 0;
+    background-color: #fbb017;
+  }
+  .contentright {
+    background-color: #fff;
+    height: 150em;
+    width: 50em;
+    margin-left: 4em;
+    margin-top: 3em;
+    border-radius: 25px;
+    display: table-row;
+  }
+  .title {
+    display: flex;
+    margin-left: 2em;
+    margin-top: 2em;
+  }
+  .title h2 {
+    cursor: pointer;
+    font-size: 40px;
+  }
+  .contentright hr {
+    height: 1px;
+    margin: 1em 0;
+    border-top: 1px solid #9ea0a5;
+  }
+  .form {
+    margin-left: 2em;
+  }
+  .form input {
+    border: 1px solid #9ea0a5;
+    border-radius: 5px;
+  }
+  .contentright p {
+    margin-top: 1em;
+  }
+  .contentright h2 {
+    font-size: 40px;
+    margin-left: 1em;
+    margin-top: 1em;
+  }
+  .form button {
+    background-color: #fbb017;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    color: #fff;
+    margin-left: 1em;
+  }
+  .btn {
+    margin-left: 2em;
+    margin-top: 1em;
+    border-radius: 5px;
+    width: 600px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    color: #fbb017;
+    border: 1px solid #fbb017;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  

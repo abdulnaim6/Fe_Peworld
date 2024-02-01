@@ -1,0 +1,119 @@
+.content {
+    margin-top: 10%;
+    margin-left: 7%;
+  }
+  .content h1 {
+    color: #1f2a36;
+    font-family: Open Sans;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 70px; /* 159.091% */
+  }
+  .content p {
+    color: #46505c;
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 155.556% */
+  }
+  .content button {
+    background-color: #5e50a1;
+    width: 350px;
+    height: 70px;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: #fff;
+  }
+  .contentimg {
+    margin-left: 7%;
+  }
+  .content2 h1 {
+    color: #1f2a36;
+    font-family: Open Sans;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 56px;
+    margin-left: 20%;
+  }
+  .cek {
+    display: flex;
+    margin-left: 8em;
+  }
+  .cek p {
+    margin-left: 1em;
+  }
+  .contentimg3 {
+    margin-left: 30%;
+  }
+  .fb h3 {
+    color: #1f2a36;
+    font-family: Open Sans;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 56px; /* 155.556% */
+  }
+  .endcontent {
+    background-color: #5e50a1;
+    width: 1140px;
+    height: 227px;
+    flex-shrink: 0;
+    margin-left: 5%;
+    margin-top: 2%;
+    border-top-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    margin-bottom: 5%;
+  }
+  .endcontent h4 {
+    color: #fff;
+    font-family: Open Sans;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 56px;
+    margin-top: 5%;
+    margin-left: 5%;
+  }
+  .endcontent button {
+    background-color: white;
+    width: 210px;
+    height: 63.106px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    margin-left: 45%;
+    margin-top: 8%;
+  }
+  .testimoni {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .opinion {
+    justify-content: center;
+  }
+  .opinionimg {
+    border-radius: 60%;
+    margin-left: 9em;
+  }
+  .opinion h3 {
+    color: #1f2a36;
+    font-family: Open Sans;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 56px; /* 186.667% */
+  }
+  .opinion p {
+    color: #9ea0a5;
+    text-align: center;
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 155.556% */
+  }
+  

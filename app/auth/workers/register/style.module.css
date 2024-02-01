@@ -1,0 +1,15 @@
+.right {
+    margin-left: 5%;
+  }
+  .content h1 {
+    font-size: 32px;
+  }
+  .tabs {
+    display: flex;
+  }
+  .tabs h4 {
+    margin-left: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  
