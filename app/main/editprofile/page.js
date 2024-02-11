@@ -1,4 +1,5 @@
-import React  from "react";
+"use client"
+import React, { useState }  from "react";
 import Styles from "./style.module.css";
 import Image from "next/image";
 import Head from "next/head";
@@ -8,8 +9,62 @@ import Navbar from "@/components/navbar";
 import img from "@/public/assets/aim.jpg"
 import { MdEdit } from "react-icons/md";
 import { IoLocation } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import Swal from 'sweetalert2';
 
 function Index() {
+  const [form, setForm] = useState({
+    application_name: "",
+    link_repository: "",
+    application: "",
+    image: "",
+  });
+
+  const router = useRouter();
+
+  const handleChange = (e) => {
+    setForm((current) => ({
+      ...current,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolio`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(form)
+    })
+    .then(async(res)=>{
+      if(!res.ok){
+       const result =  await res.json()
+        throw result.message
+      } 
+      return res.json()
+    })
+    .then((res)=>{
+      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Post portofolio Successful',
+        text: 'You have successfully post portofolio!',
+      });
+      router.push("/main/profile")
+    })
+    .catch((err)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Post portofolio Failed',
+        text: err,
+      });
+      console.log(err);
+    })
+  };
+
   return (
     <>
       <Head>
@@ -173,14 +228,17 @@ function Index() {
             </div>
             <h2>portofolio</h2>
             <hr />
+            <form onSubmit={handleSubmit}>
             <div className={Styles.form}>
               <p>Nama Aplikasi</p>
               <input
                 style={{ color: "black", width: 600, height: 50 }}
                 label="Nama Aplikasi"
-                name="namaAplikasi"
+                name="application_name"
                 type="text"
                 placeholder="Masukkan Nama Aplikasi"
+                value={form.application_name}
+                onChange={handleChange}
               />
             </div>
             <div className={Styles.form}>
@@ -188,9 +246,11 @@ function Index() {
               <input
                 style={{ color: "black", width: 600, height: 50 }}
                 label="Link Repository"
-                name="linkRepo"
+                name="link_repository"
                 type="text"
                 placeholder="Masukkan Link Repository"
+                value={form.link_repository}
+                onChange={handleChange}
               />
             </div>
             <p style={{ marginLeft: 30 }}>Type Repository</p>
@@ -199,9 +259,11 @@ function Index() {
                 <input
                   style={{ color: "black", width: 50, height: 30 }}
                   label="Nama Perusahaan"
-                  name="typeportofolio"
+                  name="aplication"
                   type="checkbox"
                   placeholder="Masukkan Nama perusahaan"
+                  value={form.application}
+                  onChange={handleChange}
                 />
                 <p>Aplikasi Mobile</p>
               </div>
@@ -229,8 +291,11 @@ function Index() {
                 name="Upload Gambar"
                 type="file"
                 placeholder="Upload Gambar"
+                value={form.image}
+                onChange={handleChange}
               />
             </div>
+            </form>
             <div className={Styles.btn}>
               <button type="submit" >
                 Tambah Pengalaman Kerja

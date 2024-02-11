@@ -24,12 +24,13 @@ function Index() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('https://fwm17-be-peword.vercel.app/v1/auth/login', {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify(form)
     })
     .then(async(res) => {

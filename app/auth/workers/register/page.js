@@ -27,7 +27,7 @@ function Index() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    fetch('https://fwm17-be-peword.vercel.app/v1/workers/register', {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/workers/register`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

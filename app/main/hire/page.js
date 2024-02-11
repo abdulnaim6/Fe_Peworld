@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import Styles from "./style.module.css";
 import Image from "next/image";
 import Head from "next/head";
@@ -9,8 +10,62 @@ import { IoLocation } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaInstagram, FaGithub  } from "react-icons/fa";
 import { FiGitlab } from "react-icons/fi";
+import { useRouter } from "next/navigation";
+import Swal from 'sweetalert2';
 
 function Index() {
+  const [form, setForm] = useState({
+    message_purpose: "",
+    name: "",
+    email: "",
+    phone: "",
+    desciption: "",
+  });
+
+  const router = useRouter();
+
+  const handleChange = (e) => {
+    setForm((current) => ({
+      ...current,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/hire`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(form)
+    })
+    .then(async(res)=>{
+      if(!res.ok){
+       const result =  await res.json()
+        throw result.message
+      } 
+      return res.json()
+    })
+    .then((res)=>{
+      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Hire Successful',
+        text: 'You have successfully Hire!',
+      });
+      router.push("/auth/login")
+    })
+    .catch((err)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Hire Failed',
+        text: err,
+      });
+      console.log(err);
+    })
+  };
   return (
     <>
       <Head>
@@ -62,14 +117,17 @@ function Index() {
             <div>
               <h3>Hubungi Abdul Naim</h3>
               <p>Untuk pekerjaan yang baik hire talent berikut</p>
+              <form onSubmit={handleSubmit}>
               <div className={Styles.form}>
                 <p>Tujuan Tentang Pesan Ini</p>
                 <input
                   style={{ color: "black", width: 800, height: 50 }}
                   label="Proyek "
-                  name="project"
+                  name="message_purpose"
                   type="text"
                   placeholder="Proyek"
+                  value={form.message_purpose}
+              onChange={handleChange}
                 />
               </div>
               <div className={Styles.form}>
@@ -80,6 +138,8 @@ function Index() {
                   name="name"
                   type="text"
                   placeholder="Masukkan Nama Lengkap"
+                  value={form.name}
+                  onChange={handleChange}
                 />
               </div>
               <div className={Styles.form}>
@@ -90,6 +150,8 @@ function Index() {
                   name="email"
                   type="text"
                   placeholder="Masukkan Email"
+                  value={form.email}
+                  onChange={handleChange}
                 />
               </div>
               <div className={Styles.form}>
@@ -100,6 +162,8 @@ function Index() {
                   name="phone"
                   type="text"
                   placeholder="Masukkan No Handphone"
+                  value={form.phone}
+                  onChange={handleChange}
                 />
               </div>
               <div className={Styles.form}>
@@ -110,8 +174,11 @@ function Index() {
                   name="description"
                   type="text"
                   placeholder="Deskripsikan/jelaskan lebih detail "
+                  value={form.desciption}
+                  onChange={handleChange}
                 />
               </div>
+              </form>
               <button type="submit" >
                 {/* <Link href="/hire"> */}
                 Hire

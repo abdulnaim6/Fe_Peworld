@@ -6,13 +6,14 @@ import Image from "next/image";
 import Footer from "@/components/footer";
 import Navbar from "@/components/Navbar";
 import { FiMapPin } from "react-icons/fi";
+import { CiUser } from "react-icons/ci";
 
 function Index() {
   const [jobs, setJobs] = useState([]);
   // const [skills, setSkills] = useState([]);
 
   useEffect(() => {
-    fetch('https://fwm17-be-peword.vercel.app/v1/workers')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/workers`)
       .then((response) => response.json())
       .then((data) => setJobs(data.data))
       .catch((error) => console.error(error));
