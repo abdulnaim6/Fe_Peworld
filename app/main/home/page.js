@@ -6,14 +6,18 @@ import Image from "next/image";
 import Footer from "@/components/footer";
 import Navbar from "@/components/Navbar";
 import { FiMapPin } from "react-icons/fi";
-import { CiUser } from "react-icons/ci";
+
 
 function Index() {
   const [jobs, setJobs] = useState([]);
   // const [skills, setSkills] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/workers`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/workers`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => setJobs(data.data))
       .catch((error) => console.error(error));
@@ -49,7 +53,7 @@ function Index() {
         </div>
 
         {
-        // Array.isArray(jobs) &&
+        Array.isArray(jobs) &&
          jobs.map((job) => (
           <div className="flex-row flex ml-12 mt-12" key={job.id}>
             <Image

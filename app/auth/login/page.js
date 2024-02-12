@@ -42,6 +42,8 @@ function Index() {
     })
     .then((res) => {
       console.log(res);
+      const token = res.data.token
+      localStorage.setItem('token', token)
       Swal.fire({
         icon: 'success',
         title: 'Login Successful',

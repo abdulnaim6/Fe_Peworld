@@ -20,10 +20,37 @@ function Index() {
     image: "",
   });
 
+  const [skill, setSkills] = useState({
+    skill_name: ""
+  });
+
+  const [experience, setExperience] = useState({
+    position: "",
+    company: "",
+    work_month: "",
+    work_year: "",
+    description: ""
+  });
+
+
   const router = useRouter();
 
   const handleChange = (e) => {
     setForm((current) => ({
+      ...current,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSkills = (e) => {
+    setSkills((current) => ({
+      ...current,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleExperience = (e) => {
+    setExperience((current) => ({
       ...current,
       [e.target.name]: e.target.value,
     }));
@@ -35,7 +62,8 @@ function Index() {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization":`Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify(form)
     })
@@ -64,6 +92,81 @@ function Index() {
       console.log(err);
     })
   };
+
+  const handleSubmitSkills = (e) => {
+    e.preventDefault()
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/skills`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      "Authorization":`Bearer ${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify(skill)
+    })
+    .then(async(res)=>{
+      if(!res.ok){
+       const result =  await res.json()
+        throw result.message
+      } 
+      return res.json()
+    })
+    .then((res)=>{
+      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Post skill Successful',
+        text: 'You have successfully post skills!',
+      });
+      router.push("/main/profile")
+    })
+    .catch((err)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Post skills Failed',
+        text: err,
+      });
+      console.log(err);
+    })
+  };
+
+  const handleSubmitCarrier = (e) => {
+    e.preventDefault()
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/experience`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      "Authorization":`Bearer ${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify(experience)
+    })
+    .then(async(res)=>{
+      if(!res.ok){
+       const result =  await res.json()
+        throw result.message
+      } 
+      return res.json()
+    })
+    .then((res)=>{
+      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Post experience Successful',
+        text: 'You have successfully post experience!',
+      });
+      router.push("/main/profile")
+    })
+    .catch((err)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Post experience Failed',
+        text: err,
+      });
+      console.log(err);
+    })
+  };
+
 
   return (
     <>
@@ -165,49 +268,72 @@ function Index() {
             </div>
             <h2>Skill</h2>
             <hr />
+            <form onSubmit={handleSubmitSkills}>
             <div className={Styles.form} style={{ display: "flex" }}>
               <input
                 style={{ color: "black", width: 500, height: 50 }}
                 label="Skill"
-                name="skill"
+                name="skill_name"
                 type="text"
                 placeholder="Skill"
+                value={skill.skill_name}
+                onChange={handleSkills}
               />
               <button type="submit">
                 Simpan
               </button>
             </div>
+            </form>
             <h2>Pengalaman Kerja</h2>
             <hr />
+            <form onSubmit={handleSubmitCarrier}>
             <div className={Styles.form}>
               <p>Posisi</p>
               <input
                 style={{ color: "black", width: 600, height: 50 }}
                 label="Posisi"
-                name="profesi"
+                name="position"
                 type="text"
                 placeholder="Masukkan Posisi Pekerjaan"
+                value={experience.position}
+                onChange={handleExperience}
+              />
+            </div>
+            <div className={Styles.form}>
+              <p>Nama Perusahaan</p>
+              <input
+                style={{ color: "black", width: 600, height: 50 }}
+                label="Posisi"
+                name="company"
+                type="text"
+                placeholder="Masukkan Posisi Pekerjaan"
+                value={experience.company}
+                onChange={handleExperience}
               />
             </div>
             <div style={{ display: "flex" }}>
               <div className={Styles.form}>
-                <p>Nama Perusahaan</p>
+                <p>Bulan</p>
                 <input
                   style={{ color: "black", width: 250, height: 50 }}
-                  label="Nama Perusahaan"
-                  name="company"
+                  label="bulan"
+                  name="work_month"
                   type="text"
                   placeholder="Masukkan Nama perusahaan"
+                  value={experience.work_month}
+                  onChange={handleExperience}
                 />
               </div>
               <div className={Styles.form}>
-                <p>Bulan/Tahun</p>
+                <p>Tahun</p>
                 <input
                   style={{ color: "black", width: 250, height: 50 }}
-                  label="Bulan/Tahun"
-                  name="date"
+                  label="Tahun"
+                  name="work_year"
                   type="text"
-                  placeholder="Bulan/Tahun"
+                  placeholder="Tahun"
+                  value={experience.work_year}
+                  onChange={handleExperience}
                 />
               </div>
             </div>
@@ -219,6 +345,8 @@ function Index() {
                 name="description"
                 type="text"
                 placeholder="Deskripsi"
+                value={experience.description}
+                onChange={handleExperience}
               />
             </div>
             <div className={Styles.btn}>
@@ -226,6 +354,7 @@ function Index() {
                 Tambah Pengalaman Kerja
               </button>
             </div>
+            </form>
             <h2>portofolio</h2>
             <hr />
             <form onSubmit={handleSubmit}>
@@ -257,17 +386,17 @@ function Index() {
             <div style={{ display: "flex" }}>
               <div className={Styles.form} style={{ display: "flex" }}>
                 <input
-                  style={{ color: "black", width: 50, height: 30 }}
+                  style={{ color: "black", width: 600, height: 50 }}
                   label="Nama Perusahaan"
-                  name="aplication"
-                  type="checkbox"
+                  name="application"
+                  type="text"
                   placeholder="Masukkan Nama perusahaan"
                   value={form.application}
                   onChange={handleChange}
                 />
-                <p>Aplikasi Mobile</p>
+                {/* <p>Aplikasi Mobile</p> */}
               </div>
-              <div className={Styles.form} style={{ display: "flex" }}>
+              {/* <div className={Styles.form} style={{ display: "flex" }}>
                 <input
                   style={{
                     color: "black",
@@ -281,26 +410,26 @@ function Index() {
                   placeholder="Bulan/Tahun"
                 />
                 <p>Aplikasi Web</p>
-              </div>
+              </div> */}
             </div>
             <div className={Styles.form}>
               <p>Upload Gambar</p>
               <input
                 style={{ color: "black", width: 600, height: 250 }}
                 label="Upload Gambar"
-                name="Upload Gambar"
+                name="image"
                 type="file"
                 placeholder="Upload Gambar"
                 value={form.image}
                 onChange={handleChange}
               />
             </div>
-            </form>
             <div className={Styles.btn}>
               <button type="submit" >
                 Tambah Pengalaman Kerja
               </button>
             </div>
+            </form>
           </section>
         </div>
         <Footer />

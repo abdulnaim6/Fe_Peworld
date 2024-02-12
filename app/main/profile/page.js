@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, {useState} from "react";
 import Styles from "./style.module.css";
 import Image from "next/image";
 import Head from "next/head";
@@ -10,9 +11,16 @@ import { IoLocation } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaInstagram, FaGithub  } from "react-icons/fa";
 import { FiGitlab } from "react-icons/fi";
-import img2 from "@/public/assets/637.png"
+import img2 from "@/public/assets/637.png";
+import Experience from "@/components/experience/page";
 
 function Index() {
+  const [activeTab, setActiveTab] = useState("portofolio");
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
     <>
       <Head>
@@ -22,7 +30,7 @@ function Index() {
       <div style={{ backgroundColor: "#5E50A1", height: 311 }}>
         <div className={Styles.content}>
             <section className={Styles.contentleft}>
-              <Link href="/editprofile">
+              <Link href="/main/editprofile">
                 <Image
                   className={Styles.contentimg}
                   src={img}
@@ -67,12 +75,14 @@ function Index() {
             </section>
           <section className={Styles.contentright}>
             <div className={Styles.title}>
-              <h3>
+              <h3 
+                onClick={() => handleTabClick("portofolio")}
+                className={activeTab === "portofolio" ? Styles.activeTab : ""}>
                 Portofolio
               </h3>
               <h3
-            
-              >
+                onClick={() => handleTabClick("pengalaman")}
+                className={activeTab === "pengalaman" ? Styles.activeTab : ""}>
                 Pengalaman kerja
               </h3>
             </div>
@@ -86,6 +96,11 @@ function Index() {
                 />
                 <p>Reminder App</p>
               </div>
+              {activeTab === "pengalaman" && (
+              <div className={Styles.pengalaman}>
+                <Experience />
+              </div>
+            )}
           </section>
         </div>
         <Footer />
