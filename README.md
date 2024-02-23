@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>Peworld</h1>
 
-## Getting Started
+## About The Project
+<p>This website was created for users who want to find workers and also users who want to work.
+Features in this Websites Users can upload their work experience and portfolio, and users can also search for 
+workers who suit their needs.
+</p>
 
-First, run the development server:
+## Table Of Content
+- [About The Project](#About-The-project)
+- [Built With](#Built-With)
+- [Installation](#Installation)
+- [Screenshot](#Screenshot)
+- [Contributing](#Contributing)
+- [Related Project](#RelatedProject)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Built With
+<p>These are the libraries and services used to build this Front End and Back End Peworld</p>
+<ul>
+  <li>
+   <a href="https://nextjs.org/">Next.js</a>
+  </li>
+   <li>
+   <a href="https://www.prisma.io/">Prisma</a>
+  </li>
+     <li>
+   <a href="https://react.de">React.js</a>
+  </li>
+    <li>
+   <a href="https://tailwindui.com/">Tailwind</a>
+  </li>
+    <li>
+And Other
+  </li>
+</ul>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+<p>1. Clone this repository</p>
+<pre>git clone https://github.com/abdulnaim6/Fe_peworld</pre>
+<p>2. Change directory to Fe_peworld</p>
+<pre>cd Hire-job</pre>
+<p>3. Install all of the required modules</p>
+<pre>npm install / npm i</pre>
+<p>4. Run this command to run the server</p>
+<pre>npm run dev</pre>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Screenshot
+<details>
+  <summary>
+    Register Pekerja
+  </summary>
+<img src="screenshots/login.png" alt="Register page" />
+</details>
+<details>
+  <summary>
+    Register perekrut
+  </summary>
+<img src="screenshots/registerperekrut.png" alt="Register page" />
+</details>
+<details>
+  <summary>
+    Login
+  </summary>
+<img src="screenshots/register.png" alt="Register page" />
+</details>
+<details>
+  <summary>
+    Landing Page
+  </summary>
+<img src="screenshots/Landingpage.png" alt="Landing page" />
+</details>
+<details>
+  <summary>
+    Home
+  </summary>
+<img src="screenshots/home.png" alt="Home page" />
+</details>
+<details>
+  <summary>
+    Profile Pekerja
+  </summary>
+<img src="screenshots/profilepekerja.png" alt="Profile page" />
+</details>
+<details>
+  <summary>
+    Edit Profile Pekerja
+  </summary>
+<img src="screenshots/editprofile.png" alt="Edit Profile page" />
+</details>
+<details>
+  <summary>
+    Hire
+  </summary>
+<img src="screenshots/hire.png" alt="Hire page" />
+</details>
+<details>
+  <summary>
+    Profile Company
+  </summary>
+<img src="screenshots/profileCompany.png" alt="ProfileCompany page" />
+</details>
+<details>
+  <summary>
+    Edit Profile Company
+  </summary>
+<img src="screenshots/editprofilept.png" alt="Edit Profile Company page" />
+</details>
 
-## Learn More
+## Contributing
+<p>These contributions are what make the open source community such a great place to learn, and create. Any contribution you make is greatly appreciated.</p>
+<ol>
+  <li>Fork the Project</li>
+  <li>Create your Feature Branch </li>
+  <li>Commit your Changes </li>
+  <li>Push to the Branch </li>
+  <li>Open to pull request</li>
+</ol>
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Related Project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+⚡[Backend Blanja](https://github.com/abdulnaim6/fwm17-be-peword)⚡
 
-## Deploy on Vercel
+⚡[Frontend Blanja](https://github.com/abdulnaim6/Fe_peworld)⚡
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+⚡[Demo Peworld]()⚡
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
