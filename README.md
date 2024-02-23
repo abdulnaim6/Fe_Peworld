@@ -6,14 +6,6 @@ Features in this Websites Users can upload their work experience and portfolio, 
 workers who suit their needs.
 </p>
 
-## Table Of Content
-- [About The Project](#About-The-project)
-- [Built With](#Built-With)
-- [Installation](#Installation)
-- [Screenshot](#Screenshot)
-- [Contributing](#Contributing)
-- [Related Project](#RelatedProject)
-
 ## Built With
 <p>These are the libraries and services used to build this Front End and Back End Peworld</p>
 <ul>
