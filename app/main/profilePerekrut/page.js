@@ -1,16 +1,46 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Styles from "./style.module.css";
-import Image from "next/image";
 import Head from "next/head";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import Navbar from "@/components/navbar";
 import { IoLocation } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
-import { FaInstagram,  FaPhoneAlt} from "react-icons/fa";
+import { FaInstagram, FaPhoneAlt } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
+import { MdEdit } from "react-icons/md";
+import { CiUser } from "react-icons/ci";
+import { TailSpin } from "react-loader-spinner";
 
 function Index() {
+  const [profile, setProfile] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  const fetchProfile = () => {
+    setLoading(true);
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/recruiters/profile`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setProfile(data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  };
+
   return (
     <>
       <Head>
@@ -36,13 +66,7 @@ function Index() {
             textAlign: "end",
           }}
         >
-          <Image
-            style={{ marginTop: "170px", marginRight: "10px" }}
-            src="/edit.svg"
-            alt="edit"
-            width={15}
-            height={15}
-          />
+          <MdEdit style={{ marginTop: "170px", marginRight: "10px" }} />
           <p
             style={{ color: "white", marginTop: "170px", marginRight: "10px" }}
           >
@@ -50,93 +74,88 @@ function Index() {
           </p>
         </div>
         <div className={Styles.content}>
-          <Image
-            style={{
-              borderRadius: 70,
-              marginBottom: "10px",
-              marginLeft: 530,
-            }}
-            src="/naim.jpg"
-            alt="naim"
-            width={150}
-            height={150}
-          />
-          <h3>PT. Martabat Jaya Abadi</h3>
-          <h5>Financial</h5>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-               <IoLocation />
-            {/* <Image
-              style={{ marginLeft: 15 }}
-              src="/map.svg"
-              alt="map"
-              height={20}
-              width={20}
-            /> */}
-            <p>Tangerang</p>
-          </div>
-          <button type="submit">
-            <Link href="/editprofilept">Edit Profile</Link>
-          </button>
-          <div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            >
-              {/* <Image src="/mail.svg" alt="mail" width={25} height={25} /> */}
-              <MdEmail />
-              <p>martabatjaya@gmail.com</p>
+          {loading ? (
+            <div className="flex justify-center mt-4">
+              <TailSpin color="#fff" height={50} width={50} />
             </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            >
-              {/* <Image src="/ig.svg" alt="ig" width={25} height={25} /> */}
-              <FaInstagram />
-              <p>martabat_jaya</p>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            >
-              {/* <Image src="/phn.svg" alt="phn" width={25} height={25} /> */}
-              <FaPhoneAlt />
-              <p>0821-8190-1821</p>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
-                marginBottom: 10,
-              }}
-            >
-              {/* <Image src="/li.svg" alt="li" width={25} height={25} /> */}
-              <CiLinkedin />
-              <p>Martabat Jaya Abadi</p>
-            </div>
-          </div>
+          ) : (
+            <>
+              <CiUser
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: 70,
+                  marginBottom: "20px",
+                  marginLeft: 560,
+                }}
+              />
+              <h3>{profile.company}</h3>
+              <h5>{profile.position}</h5>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <IoLocation />
+                <p>{profile.city}</p>
+              </div>
+              <button type="submit">
+                <Link href="/main/editProfilePerekrut">Edit Profile</Link>
+              </button>
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: 10,
+                    marginBottom: 10,
+                  }}
+                >
+                  <MdEmail />
+                  <p>{profile.email}</p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: 10,
+                    marginBottom: 10,
+                  }}
+                >
+                  <FaInstagram />
+                  <p>{profile.instagram}</p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: 10,
+                    marginBottom: 10,
+                  }}
+                >
+                  <FaPhoneAlt />
+                  <p>{profile.phone}</p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: 10,
+                    marginBottom: 10,
+                  }}
+                >
+                  <CiLinkedin />
+                  <p>{profile.linkedin}</p>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div style={{ marginTop: "45em" }}>

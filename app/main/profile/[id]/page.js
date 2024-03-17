@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Styles from "./style.module.css";
+import Styles from "../style.module.css";
 import Image from "next/image";
 import Head from "next/head";
 import Footer from "@/components/Footer";
@@ -14,18 +14,19 @@ import Experience from "@/components/experience/page";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
-function Index() {
+function Index({ params }) {
   const [activeTab, setActiveTab] = useState("portofolio");
   const [profile, setProfile] = useState({});
   const [skills, setSkills] = useState({});
   const [portfolio, setPortofolio] = useState({});
+  const id = params.id;
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/workers/profile`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/workers/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -38,7 +39,7 @@ function Index() {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/skills`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/skills/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -51,7 +52,7 @@ function Index() {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolio`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolio/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -63,41 +64,41 @@ function Index() {
       .catch((error) => console.error(error));
   }, []);
 
-  const handleDelete = (id) => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolio/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          setPortofolio((prevPortofolio) =>
-            prevPortofolio.filter((exp) => exp.id !== id)
-          );
-          Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "Portofolio berhasil dihapus!",
-          });
-        } else {
-          console.error("Gagal menghapus portofolio");
-          Swal.fire({
-            icon: "error",
-            title: "Gagal",
-            text: "Terjadi kesalahan saat menghapus portofolio.",
-          });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        Swal.fire({
-          icon: "error",
-          title: "Gagal",
-          text: "Terjadi kesalahan saat menghapus portofolio.",
-        });
-      });
-  };
+  //   const handleDelete = (id) => {
+  //     fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolio/${id}`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     })
+  //       .then((response) => {
+  //         if (response.ok) {
+  //           setPortofolio((prevPortofolio) =>
+  //             prevPortofolio.filter((exp) => exp.id !== id)
+  //           );
+  //           Swal.fire({
+  //             icon: "success",
+  //             title: "Success",
+  //             text: "Portofolio berhasil dihapus!",
+  //           });
+  //         } else {
+  //           console.error("Gagal menghapus portofolio");
+  //           Swal.fire({
+  //             icon: "error",
+  //             title: "Gagal",
+  //             text: "Terjadi kesalahan saat menghapus portofolio.",
+  //           });
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //         Swal.fire({
+  //           icon: "error",
+  //           title: "Gagal",
+  //           text: "Terjadi kesalahan saat menghapus portofolio.",
+  //         });
+  //       });
+  //   };
 
   return (
     <>
@@ -108,15 +109,15 @@ function Index() {
       <div style={{ backgroundColor: "#5E50A1", height: 311 }}>
         <div className={Styles.content}>
           <section className={Styles.contentleft}>
-            <Link href="/main/editprofile">
-              <Image
-                className={Styles.contentimg}
-                src={img}
-                alt="naim"
-                width={150}
-                height={150}
-              />
-            </Link>
+            {/* <Link href="/main/editprofile"> */}
+            <Image
+              className={Styles.contentimg}
+              src={img}
+              alt="naim"
+              width={150}
+              height={150}
+            />
+            {/* </Link> */}
             <h3>{profile.name && profile.name}</h3>
             <p>{profile.job_desk}</p>
             <div style={{ display: "flex" }}>
@@ -125,7 +126,7 @@ function Index() {
             </div>
             <p>{profile.workplace}</p>
             <button type="submit">
-              <Link href="/main/hire">Hire</Link>
+              <Link href={`/main/hire/${profile.id}`}>Hire</Link>
             </button>
             <h3>Skill</h3>
             <div className={Styles.skills} style={{ display: "table-row" }}>

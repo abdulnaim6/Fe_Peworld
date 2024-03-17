@@ -1,11 +1,10 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Bgleft from "@/components/Bgleft";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-
 
 function Index() {
   const [form, setForm] = useState({
@@ -25,40 +24,42 @@ function Index() {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      credentials: 'include',
-      body: JSON.stringify(form)
+      credentials: "include",
+      body: JSON.stringify(form),
     })
-    .then(async(res) => {
-      if(!res.ok){
-        const result =  await res.json();
-        throw result.message;
-      } 
-      return res.json();
-    })
-    .then((res) => {
-      console.log(res);
-      const token = res.data.token
-      localStorage.setItem('token', token)
-      Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        text: 'You have successfully login!',
+      .then(async (res) => {
+        if (!res.ok) {
+          const result = await res.json();
+          throw result.message;
+        }
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
+        const token = res.data.token;
+        const role = res.data.role;
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", role);
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          text: "You have successfully login!",
+        });
+        router.push("/");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: err,
+        });
+        console.log(err);
       });
-      router.push("/")
-    })
-    .catch((err) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Login Failed',
-        text: err,
-      });
-      console.log(err);
-    });
   };
 
   return (
@@ -72,7 +73,10 @@ function Index() {
             <Bgleft />
           </div>
         </section>
-        <section id="login-right" className="flex-1 flex items-center justify-center mt-8">
+        <section
+          id="login-right"
+          className="flex-1 flex items-center justify-center mt-8"
+        >
           <div className="w-96">
             <div>
               <h1 className="text-2xl font-bold">Halo, People</h1>
@@ -81,7 +85,10 @@ function Index() {
             <form onSubmit={handleSubmit} className="mt-4">
               <div>
                 <div className="mb-4">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Email
                   </label>
                   <input
@@ -95,7 +102,10 @@ function Index() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Password
                   </label>
                   <input
