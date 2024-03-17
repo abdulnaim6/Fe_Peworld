@@ -8,8 +8,6 @@ import Navbar from "@/components/navbar";
 import img from "@/public/assets/aim.jpg";
 import { IoLocation } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
-import { FaInstagram, FaGithub } from "react-icons/fa";
-import { FiGitlab } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
