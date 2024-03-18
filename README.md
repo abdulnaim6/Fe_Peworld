@@ -119,4 +119,4 @@ And Other
 
 ⚡[Frontend Blanja](https://github.com/abdulnaim6/Fe_peworld)⚡
 
-⚡[Demo Peworld]()⚡
+⚡[Demo Peworld]( https://fe-peworld-three.vercel.app/)⚡
