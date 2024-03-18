@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { FiMapPin } from "react-icons/fi";
 import { CiUser } from "react-icons/ci";
 import { TailSpin } from "react-loader-spinner";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 import Navbar from "@/components/Navbar";
 
 function Pagination({ totalPages, currentPage, onPageChange }) {

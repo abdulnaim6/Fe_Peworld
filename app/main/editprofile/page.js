@@ -5,7 +5,7 @@ import Image from "next/image";
 import Head from "next/head";
 import Footer from "@/components/footer";
 import Link from "next/link";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
 import img from "@/public/assets/aim.jpg";
 import { MdEdit } from "react-icons/md";
 import { IoLocation } from "react-icons/io5";
