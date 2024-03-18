@@ -11,6 +11,7 @@ import { MdEdit } from "react-icons/md";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import img from "@/public/assets/aim.jpg";
+import { CiUser } from "react-icons/ci";
 
 function Index() {
   const router = useRouter();
@@ -91,12 +92,20 @@ function Index() {
       <div style={{ backgroundColor: "#5E50A1", height: 311 }}>
         <div className={Styles.content}>
           <section className={Styles.contentleft}>
-            <Image
+            {/* <Image
               className={Styles.contentimg}
               src={img}
               alt="naim"
               width={150}
               height={150}
+            /> */}
+            <CiUser
+              style={{
+                width: 80,
+                height: 80,
+                marginLeft: 100,
+                marginTop: 20,
+              }}
             />
             <div
               style={{
