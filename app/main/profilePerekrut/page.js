@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import Styles from "./style.module.css";
 import Head from "next/head";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 import Link from "next/link";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
 import { IoLocation } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaInstagram, FaPhoneAlt } from "react-icons/fa";
