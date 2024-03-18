@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import Bgleft from "@/components/Bgleft";
+import Bgleft from "@/components/bgLeft";
 import Styles from "./style.module.css";
 import Register from "@/app/auth/recruiters/register/page";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
 function Index() {
@@ -26,46 +26,46 @@ function Index() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/workers/register`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(form)
+      body: JSON.stringify(form),
     })
-    .then(async(res)=>{
-      if(!res.ok){
-       const result =  await res.json()
-        throw result.message
-      } 
-      return res.json()
-    })
-    .then((res)=>{
-      console.log(res);
-      Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful',
-        text: 'You have successfully registered!',
+      .then(async (res) => {
+        if (!res.ok) {
+          const result = await res.json();
+          throw result.message;
+        }
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful",
+          text: "You have successfully registered!",
+        });
+        router.push("/auth/login");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: err,
+        });
+        console.log(err);
       });
-      router.push("/auth/login")
-    })
-    .catch((err)=>{
-      Swal.fire({
-        icon: 'error',
-        title: 'Registration Failed',
-        text: err,
-      });
-      console.log(err);
-    })
   };
 
-    const [activeTab, setActiveTab] = useState("Regis Pekerja");
+  const [activeTab, setActiveTab] = useState("Regis Pekerja");
 
-    const handleTabClick = (tab) => {
-      setActiveTab(tab);
-    };
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
   return (
     <>
       <Head>
@@ -168,7 +168,6 @@ function Index() {
                   height: 50,
                   borderRadius: 10,
                 }}
-              
               >
                 {/* <Link href="/"> */}
                 Register

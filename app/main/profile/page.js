@@ -13,6 +13,7 @@ import img2 from "@/public/assets/637.png";
 import Experience from "@/components/experience/page";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { CiUser } from "react-icons/ci";
 
 function Index() {
   const [activeTab, setActiveTab] = useState("portofolio");
@@ -109,6 +110,7 @@ function Index() {
         <div className={Styles.content}>
           <section className={Styles.contentleft}>
             <Link href="/main/editprofile">
+              {/* <CiUser style={{ height: 80, width: 80 }} /> */}
               <Image
                 className={Styles.contentimg}
                 src={img}
@@ -160,36 +162,37 @@ function Index() {
                 Pengalaman kerja
               </h3>
             </div>
+
             {activeTab === "portofolio" && (
-              <div className={Styles.porto}>
-                <Image
-                  className={Styles.contentrightimg}
-                  src={img2}
-                  alt="gambar"
-                  width={250}
-                  height={250}
-                />
+              <div style={{ display: "flex" }}>
                 {Array.isArray(portfolio) &&
                   portfolio.map((portfolioItem) => (
-                    <div
-                      key={portfolioItem.id}
-                      className={Styles.portfolioItem}
-                    >
-                      <p>
-                        {portfolioItem.application_name
-                          ? portfolioItem.application_name
-                          : "Tidak ada"}
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(portfolioItem.id)}
-                      >
-                        <MdDelete />
-                      </button>
+                    <div className={Styles.porto} key={portfolioItem.id}>
+                      <Image
+                        className={Styles.contentrightimg}
+                        src={portfolioItem.image}
+                        alt={portfolioItem.application_name}
+                        width={250}
+                        height={250}
+                      />
+                      <div className={Styles.portfolioItem}>
+                        <p>
+                          {portfolioItem.application_name
+                            ? portfolioItem.application_name
+                            : "Tidak ada"}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(portfolioItem.id)}
+                        >
+                          <MdDelete />
+                        </button>
+                      </div>
                     </div>
                   ))}
               </div>
             )}
+
             {activeTab === "pengalaman" && (
               <div className={Styles.pengalaman}>
                 <Experience />

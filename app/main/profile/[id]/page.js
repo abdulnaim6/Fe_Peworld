@@ -181,12 +181,12 @@ function Index({ params }) {
                           ? portfolioItem.application_name
                           : "Tidak ada"}
                       </p>
-                      <button
+                      {/* <button
                         type="button"
                         onClick={() => handleDelete(portfolioItem.id)}
                       >
                         <MdDelete />
-                      </button>
+                      </button> */}
                     </div>
                   ))}
               </div>

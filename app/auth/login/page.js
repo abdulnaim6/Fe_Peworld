@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import Bgleft from "@/components/Bgleft";
+import Bgleft from "@/components/bgLeft";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 

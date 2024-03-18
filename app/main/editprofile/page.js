@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Styles from "./style.module.css";
 import Image from "next/image";
 import Head from "next/head";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 import Link from "next/link";
 import Navbar from "@/components/navbar";
 import img from "@/public/assets/aim.jpg";
@@ -34,6 +34,13 @@ function Index() {
     image: "",
   });
 
+  const handleChange = (e) => {
+    setForm((current) => ({
+      ...current,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const [skill, setSkills] = useState({
     skill_name: "",
   });
@@ -52,16 +59,10 @@ function Index() {
     domicile: "",
     workplace: "",
     description: "",
+    photo: "",
   });
 
   const router = useRouter();
-
-  const handleChange = (e) => {
-    setForm((current) => ({
-      ...current,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   const handleSkills = (e) => {
     setSkills((current) => ({
@@ -84,55 +85,105 @@ function Index() {
     }));
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setForm((current) => ({
-      ...current,
-      image: file,
-    }));
+  const handlePhotoProfile = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/upload`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        const result = await response.json();
+        throw result.message;
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setForm((current) => ({
+        ...current,
+        photo: data.data.file_url,
+      }));
+
+      Swal.fire({
+        icon: "success",
+        title: "Upload Gambar Berhasil",
+        text: "Gambar berhasil diunggah!",
+      });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Upload Gambar Gagal",
+        text: error,
+      });
+    }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("image", form.image);
-  //   formData.append("application_name", form.application_name);
-  //   formData.append("link_repository", form.link_repository);
-  //   formData.append("application", form.application);
-  //   try {
-  //     const response = await fetch(
-  //       `${process.env.NEXT_PUBLIC_API_URL}/portfolio`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //         },
-  //         body: formData,
-  //       }
-  //     );
-  //     if (!response.ok) {
-  //       throw new Error("Failed to upload image");
-  //     }
-  //     const data = await response.json();
-  //     console.log("Image uploaded successfully:", data);
-  //     Swal.fire({
-  //       icon: "success",
-  //       title: "Post portofolio Successful",
-  //       text: "You have successfully post portofolio!",
-  //     });
-  //     router.push("/main/profile");
-  //   } catch (error) {
-  //     console.error("Error uploading image:", error);
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Post portofolio Failed",
-  //       text: error.message,
-  //     });
-  //   }
-  // };
+  const handlePhoto = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/upload`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        const result = await response.json();
+        throw result.message;
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setForm((current) => ({
+        ...current,
+        image: data.data.file_url,
+      }));
+
+      Swal.fire({
+        icon: "success",
+        title: "Upload Gambar Berhasil",
+        text: "Gambar berhasil diunggah!",
+      });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Upload Gambar Gagal",
+        text: error,
+      });
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!form.image) {
+      Swal.fire({
+        icon: "error",
+        title: "Upload Gambar Diperlukan",
+        text: "Mohon unggah gambar terlebih dahulu!",
+      });
+      return;
+    }
+
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolio`, {
       method: "POST",
       headers: {
@@ -156,7 +207,7 @@ function Index() {
           title: "Post portofolio Successful",
           text: "You have successfully post portofolio!",
         });
-        // router.push("/main/profile");
+        router.push("/main/profile");
       })
       .catch((err) => {
         Swal.fire({
@@ -203,16 +254,6 @@ function Index() {
         });
         console.log(err);
       });
-  };
-
-  const handleAsset = async (form) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
-      method: "POST",
-      body: form,
-    });
-    const data = await response.json();
-    console.log("data", data);
-    return data.data.file_url;
   };
 
   const handleSubmitProfile = (e) => {
@@ -400,6 +441,17 @@ function Index() {
                   onChange={handleData}
                 />
               </div>
+              <div className={Styles.form}>
+                <p>Upload Gambar</p>
+                <input
+                  style={{ color: "black", width: 600, height: 50 }}
+                  label="Upload Gambar"
+                  name="photo"
+                  type="file"
+                  placeholder="Upload Gambar"
+                  onChange={handlePhotoProfile}
+                />
+              </div>
             </form>
             <h2>Skill</h2>
             <hr />
@@ -482,6 +534,7 @@ function Index() {
                   onChange={handleExperience}
                 />
               </div>
+
               <div className={Styles.btn}>
                 <button type="submit">Tambah Pengalaman Kerja</button>
               </div>
@@ -498,13 +551,13 @@ function Index() {
                   type="text"
                   placeholder="Masukkan Nama Aplikasi"
                   value={form.application_name}
-                  // onChange={handleChange}
-                  onChange={(e) =>
-                    setForm((current) => ({
-                      ...current,
-                      application_name: e.target.value,
-                    }))
-                  }
+                  onChange={handleChange}
+                  // onChange={(e) =>
+                  //   setForm((current) => ({
+                  //     ...current,
+                  //     application_name: e.target.value,
+                  //   }))
+                  // }
                 />
               </div>
               <div className={Styles.form}>
@@ -516,13 +569,13 @@ function Index() {
                   type="text"
                   placeholder="Masukkan Link Repository"
                   value={form.link_repository}
-                  // onChange={handleChange}
-                  onChange={(e) =>
-                    setForm((current) => ({
-                      ...current,
-                      link_repository: e.target.value,
-                    }))
-                  }
+                  onChange={handleChange}
+                  // onChange={(e) =>
+                  //   setForm((current) => ({
+                  //     ...current,
+                  //     link_repository: e.target.value,
+                  //   }))
+                  // }
                 />
               </div>
               <p style={{ marginLeft: 30 }}>Type Repository</p>
@@ -535,13 +588,13 @@ function Index() {
                     type="text"
                     placeholder="Masukkan Nama perusahaan"
                     value={form.application}
-                    // onChange={handleChange}
-                    onChange={(e) =>
-                      setForm((current) => ({
-                        ...current,
-                        application: e.target.value,
-                      }))
-                    }
+                    onChange={handleChange}
+                    // onChange={(e) =>
+                    //   setForm((current) => ({
+                    //     ...current,
+                    //     application: e.target.value,
+                    //   }))
+                    // }
                   />
                   {/* <p>Aplikasi Mobile</p> */}
                 </div>
@@ -570,7 +623,7 @@ function Index() {
                   type="file"
                   placeholder="Upload Gambar"
                   // value={form.image}
-                  onChange={handleFileChange}
+                  onChange={handlePhoto}
                   // onChange={handleChange}
                 />
                 {/* <input
