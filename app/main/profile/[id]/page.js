@@ -112,7 +112,7 @@ function Index({ params }) {
             {/* <Link href="/main/editprofile"> */}
             <Image
               className={Styles.contentimg}
-              src={img}
+              src={profile.photo}
               alt="naim"
               width={150}
               height={150}
@@ -162,35 +162,35 @@ function Index({ params }) {
               </h3>
             </div>
             {activeTab === "portofolio" && (
-              <div className={Styles.porto}>
-                <Image
-                  className={Styles.contentrightimg}
-                  src={img2}
-                  alt="gambar"
-                  width={250}
-                  height={250}
-                />
+              <div style={{ display: "flex" }}>
                 {Array.isArray(portfolio) &&
                   portfolio.map((portfolioItem) => (
-                    <div
-                      key={portfolioItem.id}
-                      className={Styles.portfolioItem}
-                    >
-                      <p>
-                        {portfolioItem.application_name
-                          ? portfolioItem.application_name
-                          : "Tidak ada"}
-                      </p>
-                      {/* <button
-                        type="button"
-                        onClick={() => handleDelete(portfolioItem.id)}
-                      >
-                        <MdDelete />
-                      </button> */}
+                    <div className={Styles.porto} key={portfolioItem.id}>
+                      <Image
+                        className={Styles.contentrightimg}
+                        src={portfolioItem.image}
+                        alt={portfolioItem.application_name}
+                        width={250}
+                        height={250}
+                      />
+                      <div className={Styles.portfolioItem}>
+                        <p>
+                          {portfolioItem.application_name
+                            ? portfolioItem.application_name
+                            : "Tidak ada"}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(portfolioItem.id)}
+                        >
+                          <MdDelete />
+                        </button>
+                      </div>
                     </div>
                   ))}
               </div>
             )}
+
             {activeTab === "pengalaman" && (
               <div className={Styles.pengalaman}>
                 <Experience />

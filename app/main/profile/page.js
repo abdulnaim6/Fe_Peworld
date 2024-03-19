@@ -113,7 +113,7 @@ function Index() {
               {/* <CiUser style={{ height: 80, width: 80 }} /> */}
               <Image
                 className={Styles.contentimg}
-                src={img}
+                src={profile.photo}
                 alt="naim"
                 width={150}
                 height={150}

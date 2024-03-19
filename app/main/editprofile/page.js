@@ -88,13 +88,13 @@ function Index() {
   const handlePhotoProfile = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", e.target.files[0]);
+    formData.append("photo", e.target.files[0]);
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/upload`,
+        `${process.env.NEXT_PUBLIC_API_URL}/workers/profile/photo`,
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -106,13 +106,6 @@ function Index() {
         const result = await response.json();
         throw result.message;
       }
-
-      const data = await response.json();
-      console.log(data);
-      setForm((current) => ({
-        ...current,
-        photo: data.data.file_url,
-      }));
 
       Swal.fire({
         icon: "success",
@@ -161,7 +154,7 @@ function Index() {
       Swal.fire({
         icon: "success",
         title: "Upload Gambar Berhasil",
-        text: "Gambar berhasil diunggah!",
+        text: "Lakukan Tambah Pengalaman Lagi!",
       });
     } catch (error) {
       console.error(error);
@@ -342,7 +335,7 @@ function Index() {
             <div>
               <Image
                 className={Styles.contentimg}
-                src={img}
+                src={profile.photo}
                 alt="naim"
                 width={150}
                 height={150}
@@ -369,7 +362,9 @@ function Index() {
             <button type="submit" onClick={handleSubmitProfile}>
               Simpan
             </button>
-            <button type="submit">Batal</button>
+            <Link href={"/"}>
+              <button type="submit">Batal</button>
+            </Link>
           </section>
           <section className={Styles.contentright}>
             <div className={Styles.title}>
@@ -441,18 +436,20 @@ function Index() {
                   onChange={handleData}
                 />
               </div>
-              <div className={Styles.form}>
-                <p>Upload Gambar</p>
-                <input
-                  style={{ color: "black", width: 600, height: 50 }}
-                  label="Upload Gambar"
-                  name="photo"
-                  type="file"
-                  placeholder="Upload Gambar"
-                  onChange={handlePhotoProfile}
-                />
-              </div>
             </form>
+            <h2>Update Photo</h2>
+            <hr />
+            <div className={Styles.form}>
+              <input
+                style={{ color: "black", width: 600, height: 50 }}
+                label="Upload Gambar"
+                name="photo"
+                type="file"
+                placeholder="Upload Gambar"
+                onChange={handlePhotoProfile}
+              />
+              <button type="submit">Simpan</button>
+            </div>
             <h2>Skill</h2>
             <hr />
             <form onSubmit={handleSubmitSkills}>
