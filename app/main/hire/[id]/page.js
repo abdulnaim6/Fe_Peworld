@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar";
 import { IoLocation } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import Swal from "sweetalert2";
+import { CiUser } from "react-icons/ci";
 
 function Index({ params: { id } }) {
   const [activeTab, setActiveTab] = useState("portfolio");
@@ -115,13 +116,26 @@ function Index({ params: { id } }) {
       <div>
         <div className={Styles.content}>
           <section className={Styles.contentleft}>
-            <Image
-              className={Styles.contentimg}
-              src={img}
-              alt="naim"
-              width={150}
-              height={150}
-            />
+            <div>
+              {profile.photo ? (
+                <Image
+                  className={Styles.contentimg}
+                  src={profile.photo}
+                  alt="naim"
+                  width={150}
+                  height={150}
+                />
+              ) : (
+                <CiUser
+                  style={{
+                    height: 80,
+                    width: 80,
+                    marginLeft: 100,
+                    marginTop: 50,
+                  }}
+                />
+              )}
+            </div>
             <h3>{profile.name}</h3>
             <p>{profile.job_desk}</p>
             <div style={{ display: "flex" }}>

@@ -122,7 +122,7 @@ function Index() {
               onChange={handleSortOrderChange}
               value={sortBy}
             >
-              <option value="">Sort Order</option>
+              <option value="">Sort Name By</option>
               <option value="asc">ASC</option>
               <option value="desc">DESC</option>
             </select>
