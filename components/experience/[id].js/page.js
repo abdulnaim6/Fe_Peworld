@@ -4,11 +4,11 @@ import Styles from "./style.module.css";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
-function Experience() {
+function Experience({ params: { id } }) {
   const [experience, setExperience] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/experience`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/experience/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

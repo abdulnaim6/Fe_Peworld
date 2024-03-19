@@ -139,9 +139,9 @@ function Index() {
               <p>{profile.domicile ? profile.domicile : "Indonesia"}</p>
             </div>
             <p>{profile.workplace}</p>
-            <button type="submit">
+            {/* <button type="submit">
               <Link href="/main/hire">Hire</Link>
-            </button>
+            </button> */}
             <h3>Skill</h3>
             <div className={Styles.skills} style={{ display: "table-row" }}>
               {Array.isArray(skills) &&

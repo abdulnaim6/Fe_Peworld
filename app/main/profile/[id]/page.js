@@ -6,13 +6,9 @@ import Head from "next/head";
 import Footer from "@/components/footer";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import img from "@/public/assets/aim.jpg";
 import { IoLocation } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
-import img2 from "@/public/assets/637.png";
 import Experience from "@/components/experience/page";
-import { MdDelete } from "react-icons/md";
-import Swal from "sweetalert2";
 import { CiUser } from "react-icons/ci";
 
 function Index({ params }) {
@@ -155,12 +151,12 @@ function Index({ params }) {
                             ? portfolioItem.application_name
                             : "Tidak ada"}
                         </p>
-                        <button
+                        {/* <button
                           type="button"
                           onClick={() => handleDelete(portfolioItem.id)}
                         >
                           <MdDelete />
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   ))}

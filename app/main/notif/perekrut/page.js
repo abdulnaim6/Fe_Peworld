@@ -7,6 +7,7 @@ import { CiUser } from "react-icons/ci";
 import { TailSpin } from "react-loader-spinner";
 import Footer from "@/components/footer";
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
 
 function Index() {
   const [hire, setHire] = useState([]);
@@ -36,7 +37,27 @@ function Index() {
         </div>
         {hire.map((worker, index) => (
           <div key={index} style={{ display: "flex", marginTop: 10 }}>
-            <CiUser style={{ height: 90, width: 90, marginRight: 170 }} />
+            <div style={{ marginRight: 100 }}>
+              {worker.worker_photo ? (
+                <Image
+                  // className={Styles.contentimg}
+                  src={worker.worker_photo}
+                  alt="naim"
+                  width={150}
+                  height={150}
+                />
+              ) : (
+                <CiUser
+                  style={{
+                    height: 100,
+                    width: 100,
+                    marginRight: 20,
+                    marginLeft: 30,
+                    // marginTop: 50,
+                  }}
+                />
+              )}
+            </div>
             <div>
               <div style={{ display: "flex" }}>
                 <p style={{ marginRight: 10 }}>Name :</p>

@@ -95,6 +95,7 @@ function Index() {
       </Head>
       <main>
         <Navbar />
+
         <div className="bg-purple-800 h-50 flex items-center justify-center">
           <h1 className="text-white text-center font-bold text-3xl">
             Top Jobs

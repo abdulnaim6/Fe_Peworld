@@ -231,7 +231,7 @@ function Index({ params: { id } }) {
                       borderRadius: "5px",
                       padding: "8px",
                     }}
-                    name="description"
+                    name="desciption"
                     type="text"
                     placeholder="Deskripsikan/jelaskan lebih detail "
                     value={form.desciption}
