@@ -111,13 +111,26 @@ function Index() {
           <section className={Styles.contentleft}>
             <Link href="/main/editprofile">
               {/* <CiUser style={{ height: 80, width: 80 }} /> */}
-              <Image
+              {/* <Image
                 className={Styles.contentimg}
                 src={profile.photo}
                 alt="naim"
                 width={150}
                 height={150}
-              />
+              /> */}
+              <div>
+                {profile.photo ? (
+                  <Image
+                    className={Styles.contentimg}
+                    src={profile.photo}
+                    alt="naim"
+                    width={150}
+                    height={150}
+                  />
+                ) : (
+                  <CiUser style={{ height: 80, width: 80 }} />
+                )}
+              </div>
             </Link>
             <h3>{profile.name && profile.name}</h3>
             <p>{profile.job_desk}</p>

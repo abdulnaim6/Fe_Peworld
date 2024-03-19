@@ -13,6 +13,7 @@ import img2 from "@/public/assets/637.png";
 import Experience from "@/components/experience/page";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { CiUser } from "react-icons/ci";
 
 function Index({ params }) {
   const [activeTab, setActiveTab] = useState("portofolio");
@@ -64,42 +65,6 @@ function Index({ params }) {
       .catch((error) => console.error(error));
   }, []);
 
-  //   const handleDelete = (id) => {
-  //     fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolio/${id}`, {
-  //       method: "DELETE",
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     })
-  //       .then((response) => {
-  //         if (response.ok) {
-  //           setPortofolio((prevPortofolio) =>
-  //             prevPortofolio.filter((exp) => exp.id !== id)
-  //           );
-  //           Swal.fire({
-  //             icon: "success",
-  //             title: "Success",
-  //             text: "Portofolio berhasil dihapus!",
-  //           });
-  //         } else {
-  //           console.error("Gagal menghapus portofolio");
-  //           Swal.fire({
-  //             icon: "error",
-  //             title: "Gagal",
-  //             text: "Terjadi kesalahan saat menghapus portofolio.",
-  //           });
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         Swal.fire({
-  //           icon: "error",
-  //           title: "Gagal",
-  //           text: "Terjadi kesalahan saat menghapus portofolio.",
-  //         });
-  //       });
-  //   };
-
   return (
     <>
       <Head>
@@ -109,15 +74,26 @@ function Index({ params }) {
       <div style={{ backgroundColor: "#5E50A1", height: 311 }}>
         <div className={Styles.content}>
           <section className={Styles.contentleft}>
-            {/* <Link href="/main/editprofile"> */}
-            <Image
-              className={Styles.contentimg}
-              src={profile.photo}
-              alt="naim"
-              width={150}
-              height={150}
-            />
-            {/* </Link> */}
+            <div>
+              {profile.photo ? (
+                <Image
+                  className={Styles.contentimg}
+                  src={profile.photo}
+                  alt="naim"
+                  width={150}
+                  height={150}
+                />
+              ) : (
+                <CiUser
+                  style={{
+                    height: 80,
+                    width: 80,
+                    marginLeft: 100,
+                    marginTop: 50,
+                  }}
+                />
+              )}
+            </div>
             <h3>{profile.name && profile.name}</h3>
             <p>{profile.job_desk}</p>
             <div style={{ display: "flex" }}>

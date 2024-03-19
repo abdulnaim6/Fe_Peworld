@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { FiMapPin } from "react-icons/fi";
 import { CiUser } from "react-icons/ci";
 import { TailSpin } from "react-loader-spinner";
@@ -39,16 +38,22 @@ function Index() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  // const router = useRouter();
+  const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
     fetchJobs();
-  }, [search, page]);
+  }, [search, page, sortBy]);
 
   const fetchJobs = () => {
     setLoading(true);
     const queryParams = new URLSearchParams({ limit: 10, search, page });
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/workers/?${queryParams}`, {
+
+    let url = `${process.env.NEXT_PUBLIC_API_URL}/workers/?${queryParams}`;
+    if (sortBy) {
+      url += `&sort=name&sortBy=${sortBy}`;
+    }
+
+    fetch(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -79,6 +84,10 @@ function Index() {
     setPage(newPage);
   };
 
+  const handleSortOrderChange = (e) => {
+    setSortBy(e.target.value);
+  };
+
   return (
     <>
       <Head>
@@ -107,6 +116,15 @@ function Index() {
             >
               Cari
             </button>
+            <select
+              className="w-32 h-50 bg-purple-800 rounded-r rounded-l text-white ml-5"
+              onChange={handleSortOrderChange}
+              value={sortBy}
+            >
+              <option value="">Sort Order</option>
+              <option value="asc">ASC</option>
+              <option value="desc">DESC</option>
+            </select>
           </div>
         </div>
 
